@@ -37,7 +37,7 @@ namespace TagMyPhotos
 
             [Required]
             [Description("Path to the folder containing the sample images of persons to be identified. This folder should contain one subfolder for each person to be identified." 
-            + " The subfolders should contain sample images for that person. These images wil be used for training the face recognition engine.")]
+            + " The subfolders should contain sample images for that person. These images will be used for training the face recognition engine.")]
             string samplePhotosPath,
 
             [Required]
