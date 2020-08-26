@@ -2,7 +2,7 @@
 
 namespace TagMyPhotos
 {
-    interface ITaggingService
+    public interface ITaggingService
     {
         Task TagImages(string folderPath, string groupId);
     }

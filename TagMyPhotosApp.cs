@@ -5,19 +5,20 @@ using System;
 
 namespace TagMyPhotos
 {
+    public enum OperationModes
+    {
+        Tag,
+        Train
+    }
+
+    public enum TagModes
+    {
+        CosoleOutput,
+        RenameFiles
+    }
+
     public class TagMyPhotosApp
     {
-        public enum OperationModes
-        {
-            Tag, 
-            Train
-        }
-
-        public enum TagModes
-        {
-            CosoleOutput
-        }
-
         [Verb(IsDefault = true)]
         public static void TagMyPhotos
             (
@@ -48,7 +49,7 @@ namespace TagMyPhotos
             OperationModes operationMode,
 
             [DefaultValue(TagModes.CosoleOutput)]
-            [Description("Indicates what the result of the tagging should be.")]
+            [Description("Indicates what the result of the tagging should be. ConsoleOutput will show the names of the persons found in each photo in the console. RenameFiles will rename the original files by appending the names of the persons found in the photo to the filename.")]
             TagModes tagMode
             )
         {
@@ -61,7 +62,7 @@ namespace TagMyPhotos
             }
             else if (operationMode == OperationModes.Tag)
             {
-                var imageTaggingService = new ConsoleOutputTaggingService(faceClient);
+                var imageTaggingService = TaggingServiceFactory.GetTaggingService(tagMode, faceClient);
                 imageTaggingService.TagImages(tagPhotosPath, photosGroupId).GetAwaiter().GetResult();
             }
                 
